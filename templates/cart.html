@@ -1,0 +1,38 @@
+{% include 'base.html' %}
+<title> Cart </title>
+{% block body %}
+<div class="container-fluid row">
+    <div class="col-lg-12">
+        <div class="box-element mt-4">
+            
+            <table class="table">
+                <tr>
+                    <th>
+                        <h5>Items: <strong>{{cart_items.count}}</strong></h5>
+                    </th>
+                    <th>
+                        <h5>Total: <strong>₹{{cart.total_price}}</strong></h5>
+                    </th>
+                    <th><a href="/address" class="btn btn-dark" style="float: right; margin: 5px;">Fill Address Form</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+<br>
+        
+        {% for item in cart_items %}
+            <div class="row-col">
+                <div style="flex: 2;"><img class="row-image" src="/media/{{item.product.image}}" alt=""></div>
+                <div style="flex: 2;">{{item.product.product_name}}</div>
+                <div style="flex: 1;"><b>₹{{item.product.price}}</b></div>
+                <div style="flex: 1;">
+                <p class="quantity">Quantity : <b>{{item.quantity}}</b></p>
+                <a href="/remove-cart/{{item.id}}/" class="btn btn-danger mb-3">Remove Item</a>
+                </div>
+            </div>
+        {% endfor %}
+            
+        </div>
+    </div>
+</div>
+{% endblock body %}

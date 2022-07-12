@@ -1,0 +1,55 @@
+{% include 'base.html' %}
+
+<title> Register </title>
+
+{% block body %}
+<div class="container mt-3">
+<form method="POST">
+  {% csrf_token %}
+  {% if messages %}
+        
+  {% for message in messages %}
+  <div class="alert alert-info">
+  {{message}}
+  </div>
+  {% endfor %}
+
+{% endif %}
+    <!-- Email input -->
+    <div class="form-outline mt-3 ">
+        <label class="form-label" for="form2Example1"> Username</label>
+      <input type="text" name="username" id="form2Example1" class="form-control" />
+    </div>  
+    <!-- Password input -->
+    <div class="form-outline ">
+        <label class="form-label" for="form2Example2">Password</label>
+      <input type="password" id="form2Example2" name="password" class="form-control" />
+    </div>
+    <div class="form-outline ">
+        <label class="form-label" for="form2Example1">Full Name</label>
+      <input type="text" name="full_name" id="form2Example1" class="form-control" />
+    </div>
+    <div class="form-outline ">
+        <label class="form-label" for="form2Example1">Email</label>
+      <input name="email" type="email" id="form2Example1" class="form-control" />
+    </div>
+    <div class="form-outline ">
+        <label class="form-label" for="form2Example1">Phone Number</label>
+      <input name="phone" type="number" id="form2Example1" class="form-control" />
+    </div>
+    <div class="form-outline ">
+        <label class="form-label" for="form2Example1">Profile Photo</label>
+      <input name="image" type="file" id="form2Example1" class="form-control" />
+    </div>
+     
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-success mt-2">Register</button>
+  
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Already Have a Account? <a href="/login">Login</a></p>
+      
+   
+  </form>
+</div>
+{% endblock body %}

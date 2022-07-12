@@ -1,0 +1,131 @@
+{% include 'base.html' %}
+
+<title> Your Orders </title>
+<style>
+  body{
+    background:#eee;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+.text-reset {
+    --bs-text-opacity: 1;
+    color: inherit!important;
+}
+a {
+    color: #5465ff;
+    text-decoration: none;
+}  
+</style>
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="container">
+      <!-- Title -->
+      <div class="d-flex justify-content-between align-items-center py-3">
+        <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order {{order.order_id}}</h2>
+      </div>
+    
+      <!-- Main content -->
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Details -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="mb-3 d-flex justify-content-between">
+                <div>
+                  <span class="me-3">{{order_item.date_added}}</span>
+                  <span class="badge rounded-pill bg-info">SHIPPING</span>
+                </div>
+                <div class="d-flex">
+                  <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
+                  <div class="dropdown">
+                    <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <table class="table table-borderless">
+                <tbody>
+                  {% for item in cart_item %}
+                  <tr>
+                    <td>
+                      <div class="d-flex mb-2">
+                        <div class="flex-lg-grow-1 ms-3">
+                          <h6 class="small mb-0"><a href="#" class="text-reset">{{item.product.product_name}}</a></h6>
+                          {% comment %} <span class="small">Color: Black</span> {% endcomment %}
+                        </div>
+                      </div>
+                    </td>
+                    <td>1</td>
+                    <td class="text-end">{{item.product.price}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr class="fw-bold">
+                    <td colspan="2">TOTAL</td>
+                    <td class="text-end">${{cart.total_price}}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- Payment -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <h3 class="h6">Payment Method</h3>
+                  <p>Online Razorpay <br>
+                  Total: ${{cart.total_price}} <span class="badge bg-success rounded-pill">PAID</span></p>
+                </div>
+                <div class="col-lg-6">
+                  <h3 class="h6">Billing address</h3>
+                  <address>
+                    <strong>{{ship.full_name}}</strong><br>
+                    {{ship.address}}<br>
+                    {{ship.city}},{{ship.state}} {{ship.zip_code}}<br>
+                    <abbr title="Phone">P:</abbr> {{ship.phone}}
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <!-- Shipping information -->
+            <div class="card-body">
+              <h3 class="h6">Shipping Information</h3>
+              <strong>FedEx</strong>
+              <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
+              <hr>
+              <h3 class="h6">Address</h3>
+              <address>
+                <strong>{{ship.full_name}}</strong><br>
+                {{ship.address}}<br>
+                {{ship.city}},{{ship.state}} {{ship.zip_code}}<br>
+                <abbr title="Phone">P:</abbr> {{ship.phone}}
+              </address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+
+{% endblock body %}
